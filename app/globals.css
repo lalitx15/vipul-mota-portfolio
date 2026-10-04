@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Default: Pure Luxury Space Black / Dark Midnight (Screenshot 2) */
+  :root,
+  .dark {
+    --bg-ink: 10, 12, 16; /* #0A0C10 pure midnight black */
+    --bg-canvas: 14, 17, 23; /* #0E1117 deep dark canvas */
+    --surface-charcoal: 18, 22, 30; /* #12161E card surface */
+    --surface-elevated: 24, 29, 39;
+    --text-ivory: 245, 245, 247; /* Crisp white text */
+    --text-stone: 156, 163, 175; /* Elegant silver stone text */
+    --accent-gold: 212, 175, 55; /* Rich metallic royal gold */
+    --border-line: 255, 255, 255;
+    --border-line-opacity: 0.12;
+    color-scheme: dark;
+  }
+
+  html {
+    background-color: rgb(var(--bg-ink));
+    color: rgb(var(--text-ivory));
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-inter), system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  body {
+    background-color: rgb(var(--bg-ink));
+    color: rgb(var(--text-ivory));
+    min-height: 100vh;
+  }
+
+  /* Lenis recommended smooth scroll support */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  /* Custom text selection */
+  ::selection {
+    background-color: #0071E3;
+    color: #FFFFFF;
+  }
+
+  .dark ::selection {
+    background-color: #B8860B;
+    color: #000000;
+  }
+
+  /* Accessible visible focus ring: 2px, 2px offset */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent-gold));
+    outline-offset: 2px;
+  }
+}
+
+/* Editorial & Apple utility styles */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .editorial-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .hairline-b {
+    border-bottom: 1px solid rgba(var(--border-line), var(--border-line-opacity, 0.1));
+  }
+
+  .hairline-t {
+    border-top: 1px solid rgba(var(--border-line), var(--border-line-opacity, 0.1));
+  }
+
+  .hairline-l {
+    border-left: 1px solid rgba(var(--border-line), var(--border-line-opacity, 0.1));
+  }
+
+  .hairline-r {
+    border-right: 1px solid rgba(var(--border-line), var(--border-line-opacity, 0.1));
+  }
+
+  .hairline-all {
+    border: 1px solid rgba(var(--border-line), var(--border-line-opacity, 0.1));
+  }
+}
+
+/* Grain overlay texture - disabled heavy SVG feTurbulence filter for 60fps scrolling */
+.noise-overlay {
+  display: none;
+}
+
+/* Keep standard visible cursor */
+@media (pointer: fine) {
+  body.custom-cursor-enabled {
+    cursor: default;
+  }
+  body.custom-cursor-enabled a,
+  body.custom-cursor-enabled button,
+  body.custom-cursor-enabled [role="button"],
+  body.custom-cursor-enabled input[type="submit"],
+  body.custom-cursor-enabled input[type="button"] {
+    cursor: pointer;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
